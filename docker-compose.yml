@@ -1,0 +1,11 @@
+services:
+  mongo-db:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: nahuel
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+    volumes:
+      - ./mongo/:/data/db
+    ports:
+      - 27017:27017
