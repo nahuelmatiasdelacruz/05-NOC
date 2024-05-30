@@ -1,6 +1,6 @@
-import { EmailService } from "../../../presentation/email";
-import { LogEntity, LogSeverityLevel } from "../../entities";
-import { LogRepository } from "../../repository";
+import { EmailService } from '../../../presentation/email';
+import { LogEntity, LogSeverityLevel } from '../../entities';
+import { LogRepository } from '../../repository';
 
 interface SendLogEmailUseCase {
   execute: (to: string | string[]) => Promise<boolean>

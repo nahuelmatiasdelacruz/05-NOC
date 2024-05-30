@@ -15,4 +15,9 @@ PROD=false
 
 3. Ejecutar el comando ```npm install```
 
+4. Levantar las bases de datos en DOCKER con:
+  ```
+  docker compose up -d
+  ```
+
 4. Ejecutar ```npm run dev``` (Desarrollo)

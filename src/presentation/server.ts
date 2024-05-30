@@ -1,20 +1,18 @@
-import { CheckService, SendEmailLogs } from "../domain";
-import { FileSystemDatasource,LogRepositoryImplementation, MongoLogDatasource } from "../infrastructure";
-import { CronService } from "./cron";
-import { EmailService } from "./email";
+import { CheckServiceMultiple } from '../domain';
+import { FileSystemDatasource,LogRepositoryImplementation, MongoLogDatasource, PostgresLogDatasource } from '../infrastructure';
+import { CronService } from './cron';
 
-const logRepository = new LogRepositoryImplementation(new MongoLogDatasource());
-const emailService = new EmailService();
-
+const postgresLogRepository = new LogRepositoryImplementation(new PostgresLogDatasource());
+const fsLogRepository = new LogRepositoryImplementation(new FileSystemDatasource());
+const mongoLogRepository = new LogRepositoryImplementation(new MongoLogDatasource());
 export class Server {
   public static start(){
     console.log('Server started');
-    new SendEmailLogs(emailService,logRepository).execute(['gamingp4nic@gmail.com']);
     CronService.createJob(
       '*/5 * * * * *',
       () => {
         const url = 'http://gfadsfadsfads.com';
-        new CheckService(logRepository).execute(url);
+        new CheckServiceMultiple([postgresLogRepository,fsLogRepository,mongoLogRepository]).execute(url);
       }
     );
   };
