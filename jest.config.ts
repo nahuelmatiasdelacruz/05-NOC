@@ -5,7 +5,8 @@ const config: Config = {
   coverageDirectory: "coverage",
   coverageProvider: "v8",
   preset: 'ts-jest',
-  testEnvironment: "jest-environment-node"
+  testEnvironment: "jest-environment-node",
+  setupFiles: ['<rootDir>/setupTest.ts']
 };
 
 export default config;
